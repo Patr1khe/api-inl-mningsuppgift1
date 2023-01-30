@@ -6,3 +6,13 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Products {
+  id             Int    @id @default(autoincrement()) @db.UnsignedInt
+  name           String @db.VarChar(255)
+  description    String @db.Text
+  price          Int    @db.Int()
+  images         Json?  @db.Json
+  stock_status   String @db.VarChar(255)
+  stock_quantity Int    @db.Int
+}
