@@ -8,31 +8,38 @@ datasource db {
 }
 
 model Products {
-  id             Int    @id @default(autoincrement()) @db.UnsignedInt
-  name           String @db.VarChar(255)
-  description    String @db.Text
-  price          Int    @db.Int()
-  images         Json?  @db.Json
-  stock_status   String @db.VarChar(255)
-  stock_quantity Int    @db.Int
+  id             Int           @id @default(autoincrement()) @db.UnsignedInt
+  name           String        @db.VarChar(255)
+  description    String        @db.Text
+  price          Int           @db.Int()
+  images         Json?         @db.Json
+  stock_status   String        @db.VarChar(255)
+  stock_quantity Int           @db.Int
+  orders_items   OrdersItems[]
 }
 
 model Orders {
-  id                  Int      @id @default(autoincrement()) @db.UnsignedInt
-  order_date          DateTime @updatedAt
-  customer_first_name String   @db.VarChar(255)
-  customer_last_name  String   @db.VarChar(255)
-  customer_address    String   @db.VarChar(255)
-  customer_postcode   String   @db.VarChar(255)
-  customer_city       String   @db.VarChar(255)
-  customer_email      String   @unique @db.VarChar(255)
-  customer_phone      String   @default("NULL") @db.VarChar(255)
-  order_total         Int      @db.Int
+  id                  Int           @id @default(autoincrement()) @db.UnsignedInt
+  order_date          DateTime      @updatedAt
+  customer_first_name String        @db.VarChar(255)
+  customer_last_name  String        @db.VarChar(255)
+  customer_address    String        @db.VarChar(255)
+  customer_postcode   String        @db.VarChar(255)
+  customer_city       String        @db.VarChar(255)
+  customer_email      String        @unique @db.VarChar(255)
+  customer_phone      String?       @db.VarChar(255)
+  order_total         Int           @db.Int
+  orders_items        OrdersItems[]
 }
 
 model OrdersItems {
-  product_id Int @id @db.Int
-  qty        Int @db.Int
-  item_price Int @db.Int
-  item_total Int @db.Int
+  id         Int       @id @default(autoincrement()) @db.UnsignedInt
+  product_id Int       @db.Int
+  qty        Int       @db.Int
+  item_price Int       @db.Int
+  item_total Int       @db.Int
+  Products   Products? @relation(fields: [productsId], references: [id])
+  productsId Int?      @db.UnsignedInt
+  Orders     Orders?   @relation(fields: [ordersId], references: [id])
+  ordersId   Int?      @db.UnsignedInt
 }
