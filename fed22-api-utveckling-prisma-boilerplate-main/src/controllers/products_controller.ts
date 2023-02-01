@@ -1,6 +1,8 @@
+import { debug } from 'console'
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import prisma from '../prisma'
+
 
 /**
  * GET all products
@@ -15,7 +17,7 @@ export const index = async (req: Request,   res: Response) => {
     }
     
     try {
-        const products = await prisma.products.findMany()
+        const products = await prisma.product.findMany()
         res.send(products)
     }catch (err) {
         res.status(500).send({ message: "Something went wrong, double check please! "})
@@ -35,23 +37,23 @@ export const store = async (req: Request, res: Response) => {
             data: validationFails.array(),
         })
     }
+    const {name, description, price, images, stock_status, stock_quantity } = req.body
     try {
-        const products = await prisma.products.create({
+        const products = await prisma.product.create({
             data: {
-                name: req.body.name,
-                description: req.body.description,
-                price: req.body.price,
-                images: {
-                    thumbnail: req.body.thumbnail,
-                    large: req.body.large
-                },
-                stock_status: req.body.stock_status,
-                stock_quantity: req.body.stock_quantity
+                name,
+                description,
+                price,
+                images,
+                stock_status,
+                stock_quantity,
             }
         })
+        console.log(products)
         res.status(201).send({ status: "success", data: products })      
 
     } catch (err) {
+        debug(err)
         return res.status(500).send({ status: "error", message: "Could not create product in database"})
     }
  
