@@ -20,7 +20,7 @@ export const index = async (req: Request,   res: Response) => {
         const products = await prisma.product.findMany()
         res.send(products)
     }catch (err) {
-        res.status(500).send({ message: "Something went wrong, double check please! "})
+        res.status(500).send({status: "Error", message: "Something went wrong, double check your server please!"})
     }
 }
 
@@ -56,6 +56,37 @@ export const store = async (req: Request, res: Response) => {
         debug(err)
         return res.status(500).send({ status: "error", message: "Could not create product in database"})
     }
- 
+}
+
+/**
+ * Get a single product
+ */
+export const show = async (req: Request, res: Response) => {
+    const validationFails = validationResult(req)
+    if (!validationFails.isEmpty()) {
+        return res.status(400).send({
+            status: "fail",
+            data: validationFails.array(),
+        })
+    }
+
+	const productId = Number(req.params.productId)
+
+	try {
+		const product = await prisma.product.findUniqueOrThrow({
+			where: {
+				id: productId,
+			}
+		})
+
+		res.status(200).send({
+			status: "success",
+			data: product,
+		})
+
+	} catch (err) {
+		debug("Error thrown when finding book with id: %o", req.body.productId, err)
+		return res.status(404).send({status: "error", message: "Could Not find the product in database" })
+	}
 }
 
