@@ -1,6 +1,6 @@
 import express from "express"
-import resource from './_router'
-import prodcuts from './products'
+// import resource from './_router'
+import products from './products'
 
 // instantiate a new router
 const router = express.Router()
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 /**
  * /products
  */
-router.use('/products', prodcuts)
+router.use('/products', products)
 
 /**
  * [EXAMPLE] /resource
