@@ -20,7 +20,6 @@ model Product {
 
 model Order {
   id                  Int          @id @default(autoincrement()) @db.UnsignedInt
-  order_date          DateTime     @updatedAt
   customer_first_name String       @db.VarChar(255)
   customer_last_name  String       @db.VarChar(255)
   customer_address    String       @db.VarChar(255)
@@ -34,10 +33,10 @@ model Order {
 
 model OrderItems {
   id         Int      @id @default(autoincrement()) @db.UnsignedInt
-  product_id Int      @db.Int
-  qty        Int      @db.Int
-  item_price Int      @db.Int
-  item_total Int      @db.Int
+  product_id Int      @db.UnsignedInt
+  qty        Int      @db.UnsignedInt
+  item_price Int      @db.UnsignedInt
+  item_total Int      @db.UnsignedInt
   Product    Product? @relation(fields: [productId], references: [id])
   productId  Int?     @db.UnsignedInt
   Order      Order?   @relation(fields: [orderId], references: [id])
