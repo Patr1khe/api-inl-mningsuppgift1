@@ -51,6 +51,9 @@ export const store = async (req: Request, res: Response) => {
                 order_items: {
                     create: order_items,
                 }
+            },
+            include: {
+                order_items: true,
             }
         })
         console.log(orders)
@@ -75,13 +78,16 @@ export const show = async (req: Request, res: Response) => {
     }
 
 	const orderId = Number(req.params.orderId)
-  
+    
 
 	try {
 		const order = await prisma.order.findUniqueOrThrow({
 			where: {
 				id: orderId,
-			}
+			},
+            include: {
+                order_items: true,
+            }
 		})
 
 		res.status(200).send({
