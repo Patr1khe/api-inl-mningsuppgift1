@@ -85,7 +85,7 @@ export const show = async (req: Request, res: Response) => {
 		})
 
 	} catch (err) {
-		debug("Error thrown when finding book with id: %o", req.body.productId, err)
+		debug("Error thrown when finding product with id: %o", req.body.productId, err)
 		return res.status(404).send({status: "error", message: "Could Not find the product in database" })
 	}
 }
