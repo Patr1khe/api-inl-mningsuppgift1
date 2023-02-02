@@ -90,3 +90,22 @@ export const show = async (req: Request, res: Response) => {
 	}
 }
 
+export const template = async (req: Request, res: Response) => {
+    try {
+        const products = await prisma.product.createMany({
+            data: req.body,
+        })
+
+        res.status(201).send({
+            status: "success",
+            data: products,
+        })
+    }
+    catch (err) {
+        debug(err)
+        res.status(404).send({
+            status: "fail",
+            message: "Something went wrong"
+        })
+    }
+}
