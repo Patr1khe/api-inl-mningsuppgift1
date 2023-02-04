@@ -17,7 +17,7 @@ export const index = async (req: Request,   res: Response) => {
     
     try {
         const orders = await prisma.order.findMany()
-        res.send(orders)
+        res.status(201).send({ status: "success", data: orders }) 
     }catch (err) {
         res.status(500).send({status: "Error", message: "Something went wrong, double check your server please!"})
     }
@@ -49,7 +49,7 @@ export const store = async (req: Request, res: Response) => {
                 customer_phone,
                 order_total,
                 order_items: {
-                    create: order_items,
+                    create: order_items
                 }
             },
             include: {
