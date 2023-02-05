@@ -36,7 +36,7 @@ export const store = async (req: Request, res: Response) => {
         })
     }
     const {customer_first_name, customer_last_name, customer_address, customer_postcode, customer_city, customer_email, customer_phone, order_total, order_items } = req.body
-
+    
     try {
         const orders = await prisma.order.create({
             data: {
@@ -49,7 +49,7 @@ export const store = async (req: Request, res: Response) => {
                 customer_phone,
                 order_total,
                 order_items: {
-                    create: order_items
+                    create: order_items,
                 }
             },
             include: {
