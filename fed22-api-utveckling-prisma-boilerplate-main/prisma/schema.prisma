@@ -12,7 +12,7 @@ model Product {
   name           String       @db.VarChar(255)
   description    String       @db.Text
   price          Int
-  images         Json         @db.Json
+  images         Json         @default("{}")
   stock_status   String       @default("instock") @db.VarChar(255)
   stock_quantity Int?         @default(0) @db.UnsignedInt
   order_items    OrderItems[]
@@ -40,6 +40,4 @@ model OrderItems {
   Product    Product @relation(fields: [product_id], references: [id])
   Order      Order   @relation(fields: [order_id], references: [id])
   order_id   Int     @db.UnsignedInt
-  item_name  String? @default("")
-  stock_qty  Int?    @default(0) @db.UnsignedInt
 }
