@@ -41,5 +41,3 @@ model OrderItems {
   Order      Order   @relation(fields: [order_id], references: [id])
   order_id   Int     @db.UnsignedInt
 }
-
-//* yo
