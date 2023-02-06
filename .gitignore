@@ -1,3 +1,9 @@
 node_modules
 dist
 
+/build
+/node_modules
+.DS_Store
+# Keep environment variables out of version control
+.env
+fed22_prisma_boilerplate.sql
