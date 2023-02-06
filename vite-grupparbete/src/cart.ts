@@ -1,10 +1,13 @@
 import { toggleFormFunc, toggleCheckoutCart, checkoutCartList } from "./main"
-import { ICartItem } from "./interfaces"
+import { ICartItem, Info } from "./interfaces"
 
 
 //* Globala variablar och konstanter *//
 export let cartArray: Array<ICartItem> = [],
             totalCost = 0
+
+export let cartinfo: Array<Info> = []
+
 
 export const cartListEl = document.querySelector("#cartList"),
             cartPayButton = document.querySelector("#cartPay"),
@@ -61,7 +64,13 @@ document.querySelector('#grid')!.addEventListener("click", e => {
             qty: 1,
             item_price: item_price,
             item_total: item_price,
-            stock_qty: item_quantity
+            stock_qty: item_quantity,
+        })
+        cartinfo.push({
+            product_id: productId,
+            qty:1,
+            item_price: item_price,
+            item_total: item_price,
         })
         renderCart()
     }

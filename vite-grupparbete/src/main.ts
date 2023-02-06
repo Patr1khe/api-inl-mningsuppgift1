@@ -1,7 +1,7 @@
 import { IItem, IOrder, IResponse } from './interfaces'
 import { createOrder, fetchItems } from './api'
 import { amountEl1, showFirst20, showMoreEl, instockFunc } from './showLimitedProducts'
-import { cartArray, emptyCart, renderCart, totalCost, activeCartEl } from './cart'
+import { cartArray, emptyCart, renderCart, totalCost, activeCartEl, cartinfo } from './cart'
 import './intro'
 import '/src/style.css'
 
@@ -214,8 +214,9 @@ document.querySelector('#form')?.addEventListener('submit', async e => {
         customer_email: newEmailTitle,
         customer_phone: newPhoneNumberTitle,
         order_total: totalCost,
-        order_items: cartArray
+        order_items: cartinfo
     }
+    
     
     let cartItems = cartArray
         .map(e =>

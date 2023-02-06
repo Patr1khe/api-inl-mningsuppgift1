@@ -7,6 +7,14 @@ export interface ICartItem {
     stock_qty?: number
 }
 
+export interface Info {
+    product_id: number,
+    qty: number,
+    item_price: number,
+    item_total: number,
+
+}
+
 export interface IItem {
     id: number,
     name: string,
@@ -30,7 +38,7 @@ export interface IOrder {
     customer_email: string,
     customer_phone?: string,
     order_total: number,
-    order_items: Array<ICartItem>
+    order_items: Array<Info>
 }
 
 export interface IReturnItem {
