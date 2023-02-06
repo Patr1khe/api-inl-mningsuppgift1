@@ -5,13 +5,13 @@ export const createProductRules = [
     body('description').exists().isString().withMessage('has to be a string text').bail().isLength({min:20, max: 1000}).withMessage('has to be 20-1000 chars long'),
     body('price').exists().isInt({min:1}).withMessage('has to be a Integer value and need to be higher than 0').bail(),
     body('images').isObject().withMessage('has to be an object').bail(),
-    // body('large').isString().withMessage('has to be a string').bail().notEmpty(),
-    // body('thumbnail').isString().withMessage('has to be a string').bail().notEmpty(),
+    body('images.large').isString().withMessage('has to be a string').bail().notEmpty().withMessage('You need to add image for large'),
+    body('images.thumbnail').isString().withMessage('has to be a string').bail().notEmpty().withMessage('You need to add image for thumbnail'),
     body('stock_status').exists().isString().withMessage('has to be a string').bail(),
     body('stock_quantity').custom(async () => {
         const stock_quantity = [Number, null]
         if (stock_quantity) {
             return stock_quantity
         }
-    }).withMessage('has to be a value').bail(),
+    }).withMessage('has to be a value').bail().not().isString().not().isArray(),
 ]
