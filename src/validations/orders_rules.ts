@@ -4,7 +4,7 @@ export const createOrderRules = [
     body('customer_first_name').isString().withMessage('has to be a string').bail(),
     body('customer_last_name').isString().withMessage('has to be a string').bail(),
     body('customer_address').isString().withMessage('has to be a string').bail(),
-    body('customer_postcode').isString().withMessage('has to be a string and without any spaces').bail().isNumeric().isLength({min:4, max:6}).withMessage('postcode have to be 4-6 number digits only'),
+    body('customer_postcode').isString().withMessage('has to be a string and without any spacesbar').bail().isNumeric().withMessage('only number digits no spacesbar').isLength({min:4, max:6}).withMessage('postcode have to be 4-6 number digits only'),
     body('customer_city').isString().withMessage('has to be a string').bail(),
     body('customer_email').isEmail().withMessage('has to be a email').bail(),
     body('customer_phone').optional().custom(async () => {
