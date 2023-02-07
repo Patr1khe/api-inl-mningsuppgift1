@@ -7,11 +7,11 @@ export const createProductRules = [
     body('images').isObject().withMessage('has to be an object').bail(),
     body('images.large').isString().withMessage('has to be a string').bail().notEmpty().withMessage('You need to add image for large'),
     body('images.thumbnail').isString().withMessage('has to be a string').bail().notEmpty().withMessage('You need to add image for thumbnail'),
-    body('stock_status').exists().isString().withMessage('has to be a string').bail(),
+    body('stock_status').exists().isString().withMessage('has to be a string').bail().isIn(["instock","outofstock"]).withMessage('has to be "instock" or "outofstock"'),
     body('stock_quantity').custom(async () => {
         const stock_quantity = [Number, null]
         if (stock_quantity) {
             return stock_quantity
         }
-    }).withMessage('has to be a value').bail().not().isString().not().isArray(),
+    }).withMessage('has to be a value').bail().not().isString().withMessage('You cant have string').not().isArray().withMessage('You cant have array').not().contains('.').withMessage('You cant have dot (Integer)'),
 ]
