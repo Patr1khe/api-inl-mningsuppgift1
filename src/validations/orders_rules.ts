@@ -15,8 +15,8 @@ export const createOrderRules = [
     }).withMessage('has to be a string').bail(),
     body('order_total').isInt({min: 1}).withMessage('order_total has to be higher value than 0').bail(),
     body('order_items').isArray().withMessage('has to be a array').bail().notEmpty().withMessage('you need to add orderItems property'),
-    body('order_items.*.product_id').isInt({min:1}).withMessage('product_id has to be higher value than 0').bail(),
-    body('order_items.*.qty').isInt({min:1}).withMessage('qty has to be higher value than 0').bail(),
-    body('order_items.*.item_price').isInt({min: 1}).withMessage('item_price has to be higher value than 0').bail(),
-    body('order_items.*.item_total').isInt({min: 1}).withMessage('item_total has to be higher value than 0').bail(),
+    body('order_items.*.product_id').isInt({min:1}).withMessage('product_id has to be higher value than 0').bail().not().isString().withMessage('You cant have string'),
+    body('order_items.*.qty').isInt({min:1}).withMessage('qty has to be higher value than 0').bail().not().isString().withMessage('You cant have string'),
+    body('order_items.*.item_price').isInt({min: 1}).withMessage('item_price has to be higher value than 0').bail().not().isString().withMessage('You cant have string'),
+    body('order_items.*.item_total').isInt({min: 1}).withMessage('item_total has to be higher value than 0').bail().not().isString().withMessage('You cant have string'),
 ]
