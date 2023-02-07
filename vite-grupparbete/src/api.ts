@@ -1,7 +1,7 @@
 import { IOrder, IResponse } from './interfaces'
 
 export const createOrder = async (order : IOrder) => {
-	const res = await fetch("http://localhost:3000/orders", {
+	const res = await fetch("https://vast-blue-hare-tie.cyclic.app/orders", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -21,7 +21,7 @@ export const createOrder = async (order : IOrder) => {
 }
 
 export const fetchItems = async () => {
-	const res = await fetch("http://localhost:3000/products")
+	const res = await fetch("https://vast-blue-hare-tie.cyclic.app/products")
 
 	if (!res.ok) {
 		throw new Error(`${res.status} ${res.statusText}`)
