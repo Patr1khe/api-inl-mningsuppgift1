@@ -1,11 +1,11 @@
 {
-  "name": "fed22-api-utveckling-prisma-boilerplate-main",
+  "name": "api-uppgift1",
   "version": "1.0.0",
   "description": "This is a starter template/boilerplate for a TypeScript Node.js REST API using Express, Prisma and Express-validator.",
   "main": "build/server.js",
   "scripts": {
     "build": "tsc && npx prisma migrate deploy",
-    "dev": "cross-env DEBUG=fed22-api-utveckling-prisma-boilerplate-main:* nodemon server.ts",
+    "dev": "cross-env DEBUG=api-uppgift1:* nodemon server.ts",
     "start": "node build/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
